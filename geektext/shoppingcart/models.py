@@ -1,4 +1,5 @@
 from django.db import models
+from helloworld.models import BookDetails
 
 class Product(models.Model):
     title = models.CharField(max_length=250)
@@ -14,12 +15,12 @@ class Cart(models.Model):
 
 class CartItems(models.Model):
     cartId = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    productId = models.ForeignKey(Product,on_delete = models.CASCADE)
+    productId = models.ForeignKey(BookDetails,on_delete = models.CASCADE)
     quantity = models.IntegerField()
 
 class SavedForLater(models.Model):
     cartId = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    productId = models.ForeignKey(Product,on_delete = models.CASCADE)
+    productId = models.ForeignKey(BookDetails,on_delete = models.CASCADE)
 
 
 

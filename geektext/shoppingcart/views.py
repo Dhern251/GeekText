@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import CartItems, Product, SavedForLater
 from django.db.models import Sum, F,Value
 from django.db import models
+from helloworld.models import BookDetails
 
 
 
@@ -12,7 +13,7 @@ def shoppingcart(request):
     all_items = CartItems.objects.filter(cartId = 1)#showing information of Cart #1
     totalItems = list(all_items.aggregate(Sum('quantity')).values())[0]
     primary = all_items.values_list('productId', flat=True)
-    total = Product.objects.filter(pk__in=primary).aggregate(
+    total = BookDetails.objects.filter(pk__in=primary).aggregate(
     total = Sum(F('price') * F('cartitems__quantity'), 
     output_field = models.FloatField()))['total']
     saved_items = SavedForLater.objects.filter(cartId = 1)
